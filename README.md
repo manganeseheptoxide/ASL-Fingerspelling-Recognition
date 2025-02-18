@@ -1,1 +1,1 @@
-# ASL-Fingerspelling-Recognition
+# Fingerspelling-Recognition
