@@ -7,8 +7,8 @@ from trained_models import *
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 mp_pose = mp.solutions.pose
-keras_model = KerasModel()
-xgb_model = XGBoostModel()
+keras_model = KerasModel(language='fsl')
+xgb_model = XGBoostModel(language='fsl')
 
 def detect():
 
