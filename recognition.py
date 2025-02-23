@@ -11,7 +11,7 @@ keras_model = KerasModel(language='fsl')
 xgb_model = XGBoostModel(language='fsl')
 
 def detect():
-
+    _hand_priority = 'left'
     cap = cv2.VideoCapture(0)
     with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) as hands:
         while True:
@@ -20,10 +20,10 @@ def detect():
             if not ret:
                 _status = False
                 break
-            image, _landmarks_list, _landmark_connections = detect_upperbody(frame, hands)
+            image, _landmarks_list, _landmark_connections, hand_used = detect_upperbody(frame, hands)
             if _landmarks_list and _landmarks_list.landmark:
                 mp_drawing.draw_landmarks(image, _landmarks_list, _landmark_connections)
-                
+
                 # Calculate the bounding box
                 h, w, _ = image.shape
                 buffer = 0.1
@@ -34,15 +34,18 @@ def detect():
                 y_min = min(ys) * h * (1 - buffer)
                 x_max = max(xs) * w * (1 + buffer)
                 y_max = max(ys) * h * (1 + buffer)
-                # data = 
+  
                 # Draw the bounding box
                 cv2.rectangle(image, (int(x_min), int(y_min)), (int(x_max), int(y_max)), (0, 255, 0), 2)
                 landmark_list = center_xyzlandmarks(_landmarks_list)
                 data = []
+
+                if _hand_priority != hand_used:
+                    for landmark in _landmarks_list.landmark:
+                        landmark.x = - landmark.x
                 for landmark in landmark_list.landmark:
                     data += [landmark.x, landmark.y, landmark.z]
-                # print(data)
-                label = keras_model.detect(data)
+                label = xgb_model.detect(data)
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 font_scale = 2
                 font_thickness = 1
