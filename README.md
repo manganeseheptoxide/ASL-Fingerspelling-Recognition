@@ -1,1 +1,1 @@
-# Fingerspelling-Recognition
+# Sign Language Alphabet Recognition
