@@ -6,9 +6,6 @@ This is a real-time sign language alphabet recognition program that uses Google 
 Here is a demonstration of the program recognizing the Filipino Sign Language (FSL) alphabet:  
 ![Demo](demo.gif)
 
-Watch the full demo here:
-https://github.com/manganeseheptoxide/Sign-Language-Alphabet-Recognition/assets/demo.mkv  
-
 ## **Datasets**  
 The model is trained using the following datasets:  
 - **American Sign Language (ASL) Dataset:** [Kaggle Link](https://www.kaggle.com/datasets/chaitanyakakade77/american-sign-language-dataset)  
