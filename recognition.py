@@ -45,7 +45,7 @@ def detect():
                         landmark.x = - landmark.x
                 for landmark in landmark_list.landmark:
                     data += [landmark.x, landmark.y, landmark.z]
-                label = keras_model.detect(data)
+                label = xgb_model.detect(data)
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 font_scale = 2
                 font_thickness = 1
